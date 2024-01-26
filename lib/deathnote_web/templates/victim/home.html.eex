@@ -1,0 +1,9 @@
+<div class="app">
+  <div class="ntbk">
+    <div class="ntbk_label">
+      <span class="small_caps">D</span>EATH
+      <span class="small_caps">N</span>OTE
+    </div>
+    <span class="new"><a href="/notebook">open ></a></span>
+  </div>
+</div>

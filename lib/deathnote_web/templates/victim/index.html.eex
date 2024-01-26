@@ -1,0 +1,47 @@
+<div class="app">
+  <div class="page page_left">
+    <div class="rules">
+        <p>The human whose name is written in this note shall die.</p>
+        <p>This note will not take effect unless the writer has the person's face in their mind when writing his/her name. Therefore, people sharing the same name will not be affected.</p>
+        <p>If the cause of death is written within the next 40 seconds of writing the person's name, it will happen.</p>
+        <p>If the cause of death is not specified, the person will simply die of a heart attack.</p>
+        <p>After writing the cause of death, details of the death should be written in the next 6 minutes and 40 seconds.</p>
+        <span class="back"><a href="/">< back</a></span>
+    </div>
+  </div>
+
+  <div class="page page_right">
+    <div class="list">
+        <div class="victims">
+            <%= for victim <- @victims do %>
+                <p><%= victim.victim_name %></p>
+            <% end %>
+        </div>
+
+        <div class="controls">
+            <%= if @victims.page_number == @victims.total_pages do %>
+                <div class="form">
+                    <%= form_for @changeset, Routes.victim_path(@conn, :create), fn f -> %>
+                        <div class="input">
+                        <%= text_input f, :victim_name, placeholder: " ..." %>
+                        <%= submit "↩" %>
+                        </div>
+                        <%= error_tag f, :victim_name %>
+                    <% end %>
+                </div>
+            <% else %>
+                <div></div>
+            <% end %>
+
+            <div class="pagination">
+                <%= if @victims.page_number > 1 do %>
+                    <%= link "< prev", to: Routes.victim_path(@conn, :index, page: @victims.page_number - 1) %>
+                <% end %>
+                <%= if @victims.page_number < @victims.total_pages do %>
+                    <%= link "next >", to: Routes.victim_path(@conn, :index, page: @victims.page_number + 1) %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
